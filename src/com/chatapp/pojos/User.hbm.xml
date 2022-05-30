@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30-May-2022 06:35:13 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.chatapp.pojos.User" table="user" catalog="chatapp_rmi" optimistic-lock="version">
+        <id name="userId" type="java.lang.Integer">
+            <column name="user_id" />
+            <generator class="identity" />
+        </id>
+        <property name="role" type="string">
+            <column name="role" length="5" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="username" type="string">
+            <column name="username" length="32" not-null="true" unique="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="64" not-null="true" />
+        </property>
+        <property name="nickname" type="string">
+            <column name="nickname" length="50" not-null="true" />
+        </property>
+        <property name="avatar" type="binary">
+            <column name="avatar" />
+        </property>
+        <set name="subscriptions" table="subscription" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.chatapp.pojos.Subscription" />
+        </set>
+    </class>
+</hibernate-mapping>
