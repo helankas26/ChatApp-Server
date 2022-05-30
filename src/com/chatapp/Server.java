@@ -1,10 +1,16 @@
+package com.chatapp;
 
 import com.chatapp.dao.ChatDAO;
+import com.chatapp.dao.ChatsessionDAO;
+import com.chatapp.dao.MessageDAO;
+import com.chatapp.dao.SubscriptionDAO;
 import com.chatapp.dao.UserDAO;
-import com.chatapp.pojos.Chat;
-import com.chatapp.pojos.User;
-import java.time.Instant;
-import java.util.Date;
+import com.chatapp.pojos.Chatsession;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,23 +22,32 @@ import java.util.Date;
  *
  * @author Helanka
  */
-public class ServerMain {
-    public static void main(String[] args) {
-        Chat c = new Chat();
-        
-        c.setChatId(1);
-//        c.setName("zzz");
-//        c.setDescription("sds ds  zzdsds");
-//        c.setStatus(0);
-//        c.setCreatedAt(Date.from(Instant.now()));
-//        
-//        ChatDAO d = new ChatDAO();
-//        d.deleteChat(c);
-//       
-        User n = new User();
-        n.setUserId(1);
-        System.out.println(new UserDAO().getUser(n));
+public class Server {
+    public static void main(String[] args) throws RemoteException {
+        try {
+               //Create remote object
+               ChatDAO chatStub = new ChatDAO();
+               ChatsessionDAO chatsessionStub = new ChatsessionDAO();
+               MessageDAO messagechatsessionStub = new MessageDAO();
+               SubscriptionDAO subscriptionStub = new SubscriptionDAO();
+               UserDAO userStub = new UserDAO();
 
-        System.exit(0);
+
+               //Create a remote registry
+               Registry reg = LocateRegistry.createRegistry(4000);
+
+               //Register the remote objects to the registry and advertise
+               reg.rebind("ChatService", (Remote) chatStub);
+               reg.rebind("ChatsessionService", (Remote) chatsessionStub);
+               reg.rebind("MessageService", (Remote) messagechatsessionStub);
+               reg.rebind("SubscriptionService", (Remote) subscriptionStub);
+               reg.rebind("UserService", (Remote) userStub);
+
+               System.out.println("Server is connected and running.....");
+           } catch (RemoteException ex) {
+               System.out.println("Server is not connected....." + ex.getMessage());
+        }
     }
+    
+    
 }
