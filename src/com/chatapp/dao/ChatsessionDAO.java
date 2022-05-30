@@ -6,7 +6,10 @@
 package com.chatapp.dao;
 
 import com.chatapp.pojos.Chatsession;
+import com.chatapp.rmi.ChatsessionRemote;
 import com.chatapp.util.Connection;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -15,7 +18,11 @@ import org.hibernate.Transaction;
  *
  * @author Helanka
  */
-public class ChatsessionDAO {
+public class ChatsessionDAO extends UnicastRemoteObject implements ChatsessionRemote{
+    
+    public ChatsessionDAO() throws RemoteException{
+        super();
+    }
     
     public List<Chatsession> getAllChatsession() {
         Session s = Connection.getSessionFactory().openSession();
@@ -29,7 +36,7 @@ public class ChatsessionDAO {
         return chatsessions;
     }
     
-    public boolean createUser(Chatsession chatsession) {
+    public boolean createChatsession(Chatsession chatsession) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
         
@@ -40,7 +47,7 @@ public class ChatsessionDAO {
         return true;
     }
     
-    public Chatsession getUser(Chatsession chatsession) {
+    public Chatsession getChatsession(Chatsession chatsession) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
         
@@ -52,7 +59,7 @@ public class ChatsessionDAO {
         return cs;
     }
     
-    public boolean updateUser(Chatsession chatsession) {
+    public boolean updateChatsession(Chatsession chatsession) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
         
@@ -62,7 +69,7 @@ public class ChatsessionDAO {
         
         return true;
     }
-    public boolean deleteUser(Chatsession chatsession) {
+    public boolean deleteChatsession(Chatsession chatsession) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
 

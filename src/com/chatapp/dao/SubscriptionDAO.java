@@ -6,7 +6,10 @@
 package com.chatapp.dao;
 
 import com.chatapp.pojos.Subscription;
+import com.chatapp.rmi.SubscriptionRemote;
 import com.chatapp.util.Connection;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -15,7 +18,11 @@ import org.hibernate.Transaction;
  *
  * @author Helanka
  */
-public class SubscriptionDAO {
+public class SubscriptionDAO extends UnicastRemoteObject implements SubscriptionRemote{
+    
+    public SubscriptionDAO() throws RemoteException{
+        super();
+    }
     
     public List<Subscription> getAllSubscribers() {
         Session s = Connection.getSessionFactory().openSession();

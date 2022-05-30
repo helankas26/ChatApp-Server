@@ -6,7 +6,10 @@
 package com.chatapp.dao;
 
 import com.chatapp.pojos.User;
+import com.chatapp.rmi.UserRemote;
 import com.chatapp.util.Connection;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -15,7 +18,11 @@ import org.hibernate.Transaction;
  *
  * @author Helanka
  */
-public class UserDAO {
+public class UserDAO extends UnicastRemoteObject implements UserRemote {
+    
+    public UserDAO() throws RemoteException{
+        super();
+    }
     
     public List<User> getAllUser() {
         Session s = Connection.getSessionFactory().openSession();
