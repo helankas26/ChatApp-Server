@@ -1,5 +1,5 @@
 package com.chatapp.pojos;
-// Generated 30-May-2022 06:35:13 by Hibernate Tools 4.3.1
+// Generated 29-Mar-2023 16:19:53 by Hibernate Tools 4.3.1
 
 
 
@@ -8,9 +8,8 @@ package com.chatapp.pojos;
  */
 public class SubscriptionId  implements java.io.Serializable {
 
-
-     private int userId;
-     private int chatId;
+    private int userId;
+    private int chatId;
 
     public SubscriptionId() {
     }
@@ -27,6 +26,7 @@ public class SubscriptionId  implements java.io.Serializable {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+    
     public int getChatId() {
         return this.chatId;
     }
@@ -35,26 +35,22 @@ public class SubscriptionId  implements java.io.Serializable {
         this.chatId = chatId;
     }
 
+    public boolean equals(Object other) {
+        if ( (this == other ) ) return true;
+        if ( (other == null ) ) return false;
+        if ( !(other instanceof SubscriptionId) ) return false;
+        SubscriptionId castOther = ( SubscriptionId ) other; 
 
-   public boolean equals(Object other) {
-         if ( (this == other ) ) return true;
-		 if ( (other == null ) ) return false;
-		 if ( !(other instanceof SubscriptionId) ) return false;
-		 SubscriptionId castOther = ( SubscriptionId ) other; 
-         
-		 return (this.getUserId()==castOther.getUserId())
- && (this.getChatId()==castOther.getChatId());
-   }
+        return (this.getUserId()==castOther.getUserId()) && (this.getChatId()==castOther.getChatId());
+    }
    
-   public int hashCode() {
-         int result = 17;
-         
-         result = 37 * result + this.getUserId();
-         result = 37 * result + this.getChatId();
-         return result;
-   }   
+    public int hashCode() {
+        int result = 17;
 
-
+        result = 37 * result + this.getUserId();
+        result = 37 * result + this.getChatId();
+        return result;
+    }   
 }
 
 

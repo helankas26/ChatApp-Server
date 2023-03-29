@@ -1,5 +1,5 @@
 package com.chatapp.pojos;
-// Generated 30-May-2022 06:35:13 by Hibernate Tools 4.3.1
+// Generated 29-Mar-2023 16:19:53 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -11,26 +11,25 @@ import java.util.Set;
  */
 public class Chat  implements java.io.Serializable {
 
-
-     private int chatId;
-     private String name;
-     private String description;
-     private byte[] avatar;
-     private int status;
-     private Date createdAt;
-     private Set subscriptions = new HashSet(0);
-     private Set chatsessions = new HashSet(0);
+    private int chatId;
+    private String name;
+    private String description;
+    private byte[] avatar;
+    private int status;
+    private Date createdAt;
+    private Set subscriptions = new HashSet(0);
+    private Set chatSessions = new HashSet(0);
 
     public Chat() {
     }
-
 	
     public Chat(int chatId, String name, int status) {
         this.chatId = chatId;
         this.name = name;
         this.status = status;
     }
-    public Chat(int chatId, String name, String description, byte[] avatar, int status, Date createdAt, Set subscriptions, Set chatsessions) {
+    
+    public Chat(int chatId, String name, String description, byte[] avatar, int status, Date createdAt, Set subscriptions, Set chatSessions) {
        this.chatId = chatId;
        this.name = name;
        this.description = description;
@@ -38,7 +37,7 @@ public class Chat  implements java.io.Serializable {
        this.status = status;
        this.createdAt = createdAt;
        this.subscriptions = subscriptions;
-       this.chatsessions = chatsessions;
+       this.chatSessions = chatSessions;
     }
    
     public int getChatId() {
@@ -48,6 +47,7 @@ public class Chat  implements java.io.Serializable {
     public void setChatId(int chatId) {
         this.chatId = chatId;
     }
+    
     public String getName() {
         return this.name;
     }
@@ -55,6 +55,7 @@ public class Chat  implements java.io.Serializable {
     public void setName(String name) {
         this.name = name;
     }
+    
     public String getDescription() {
         return this.description;
     }
@@ -62,6 +63,7 @@ public class Chat  implements java.io.Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+    
     public byte[] getAvatar() {
         return this.avatar;
     }
@@ -69,6 +71,7 @@ public class Chat  implements java.io.Serializable {
     public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
     }
+    
     public int getStatus() {
         return this.status;
     }
@@ -76,6 +79,7 @@ public class Chat  implements java.io.Serializable {
     public void setStatus(int status) {
         this.status = status;
     }
+    
     public Date getCreatedAt() {
         return this.createdAt;
     }
@@ -83,6 +87,7 @@ public class Chat  implements java.io.Serializable {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+    
     public Set getSubscriptions() {
         return this.subscriptions;
     }
@@ -90,17 +95,14 @@ public class Chat  implements java.io.Serializable {
     public void setSubscriptions(Set subscriptions) {
         this.subscriptions = subscriptions;
     }
-    public Set getChatsessions() {
-        return this.chatsessions;
+    
+    public Set getChatSessions() {
+        return this.chatSessions;
     }
     
-    public void setChatsessions(Set chatsessions) {
-        this.chatsessions = chatsessions;
+    public void setChatSessions(Set chatSessions) {
+        this.chatSessions = chatSessions;
     }
-
-
-
-
 }
 
 

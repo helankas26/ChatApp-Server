@@ -1,7 +1,8 @@
 package com.chatapp.pojos;
-// Generated 30-May-2022 06:35:13 by Hibernate Tools 4.3.1
+// Generated 29-Mar-2023 16:19:53 by Hibernate Tools 4.3.1
 
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,19 +11,18 @@ import java.util.Set;
  */
 public class User  implements java.io.Serializable {
 
-
-     private Integer userId;
-     private String role;
-     private String email;
-     private String username;
-     private String password;
-     private String nickname;
-     private byte[] avatar;
-     private Set subscriptions = new HashSet(0);
+    private Integer userId;
+    private String role;
+    private String email;
+    private String username;
+    private String password;
+    private String nickname;
+    private byte[] avatar;
+    private Date deletedAt;
+    private Set subscriptions = new HashSet(0);
 
     public User() {
     }
-
 	
     public User(String role, String email, String username, String password, String nickname) {
         this.role = role;
@@ -31,13 +31,15 @@ public class User  implements java.io.Serializable {
         this.password = password;
         this.nickname = nickname;
     }
-    public User(String role, String email, String username, String password, String nickname, byte[] avatar, Set subscriptions) {
+    
+    public User(String role, String email, String username, String password, String nickname, byte[] avatar, Date deletedAt, Set subscriptions) {
        this.role = role;
        this.email = email;
        this.username = username;
        this.password = password;
        this.nickname = nickname;
        this.avatar = avatar;
+       this.deletedAt = deletedAt;
        this.subscriptions = subscriptions;
     }
    
@@ -48,6 +50,7 @@ public class User  implements java.io.Serializable {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+    
     public String getRole() {
         return this.role;
     }
@@ -55,6 +58,7 @@ public class User  implements java.io.Serializable {
     public void setRole(String role) {
         this.role = role;
     }
+    
     public String getEmail() {
         return this.email;
     }
@@ -62,6 +66,7 @@ public class User  implements java.io.Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+    
     public String getUsername() {
         return this.username;
     }
@@ -69,6 +74,7 @@ public class User  implements java.io.Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
+    
     public String getPassword() {
         return this.password;
     }
@@ -76,6 +82,7 @@ public class User  implements java.io.Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+    
     public String getNickname() {
         return this.nickname;
     }
@@ -83,6 +90,7 @@ public class User  implements java.io.Serializable {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
+    
     public byte[] getAvatar() {
         return this.avatar;
     }
@@ -90,6 +98,15 @@ public class User  implements java.io.Serializable {
     public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
     }
+    
+    public Date getDeletedAt() {
+        return this.deletedAt;
+    }
+    
+    public void setDeletedAt(Date deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+    
     public Set getSubscriptions() {
         return this.subscriptions;
     }
@@ -97,10 +114,6 @@ public class User  implements java.io.Serializable {
     public void setSubscriptions(Set subscriptions) {
         this.subscriptions = subscriptions;
     }
-
-
-
-
 }
 
 

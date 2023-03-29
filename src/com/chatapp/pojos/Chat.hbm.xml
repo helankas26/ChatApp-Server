@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 30-May-2022 06:35:13 by Hibernate Tools 4.3.1 -->
+<!-- Generated 29-Mar-2023 16:19:54 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.chatapp.pojos.Chat" table="chat" catalog="chatapp_rmi" optimistic-lock="version">
         <id name="chatId" type="int">
             <column name="chat_id" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="name" type="string">
-            <column name="name" length="100" not-null="true" />
+            <column name="name" length="100" not-null="true" unique="true" />
         </property>
         <property name="description" type="string">
             <column name="description" length="200" />
@@ -20,8 +20,8 @@
         <property name="status" type="int">
             <column name="status" not-null="true" />
         </property>
-        <property name="createdAt" type="timestamp">
-            <column name="created_at" length="19" />
+        <property name="createdAt" type="date">
+            <column name="created_at" length="10" />
         </property>
         <set name="subscriptions" table="subscription" inverse="true" lazy="true" fetch="select">
             <key>
@@ -29,11 +29,11 @@
             </key>
             <one-to-many class="com.chatapp.pojos.Subscription" />
         </set>
-        <set name="chatsessions" table="chatsession" inverse="true" lazy="true" fetch="select">
+        <set name="chatSessions" table="chat_session" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="chat_id" not-null="true" />
             </key>
-            <one-to-many class="com.chatapp.pojos.Chatsession" />
+            <one-to-many class="com.chatapp.pojos.ChatSession" />
         </set>
     </class>
 </hibernate-mapping>

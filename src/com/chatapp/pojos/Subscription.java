@@ -1,5 +1,5 @@
 package com.chatapp.pojos;
-// Generated 30-May-2022 06:35:13 by Hibernate Tools 4.3.1
+// Generated 29-Mar-2023 16:19:53 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -9,21 +9,20 @@ import java.util.Date;
  */
 public class Subscription  implements java.io.Serializable {
 
-
-     private SubscriptionId id;
-     private Chat chat;
-     private User user;
-     private Date registeredAt;
+    private SubscriptionId id;
+    private Chat chat;
+    private User user;
+    private Date registeredAt;
 
     public Subscription() {
     }
-
 	
     public Subscription(SubscriptionId id, Chat chat, User user) {
         this.id = id;
         this.chat = chat;
         this.user = user;
     }
+    
     public Subscription(SubscriptionId id, Chat chat, User user, Date registeredAt) {
        this.id = id;
        this.chat = chat;
@@ -38,6 +37,7 @@ public class Subscription  implements java.io.Serializable {
     public void setId(SubscriptionId id) {
         this.id = id;
     }
+    
     public Chat getChat() {
         return this.chat;
     }
@@ -45,6 +45,7 @@ public class Subscription  implements java.io.Serializable {
     public void setChat(Chat chat) {
         this.chat = chat;
     }
+    
     public User getUser() {
         return this.user;
     }
@@ -52,6 +53,7 @@ public class Subscription  implements java.io.Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+    
     public Date getRegisteredAt() {
         return this.registeredAt;
     }
@@ -59,10 +61,6 @@ public class Subscription  implements java.io.Serializable {
     public void setRegisteredAt(Date registeredAt) {
         this.registeredAt = registeredAt;
     }
-
-
-
-
 }
 
 

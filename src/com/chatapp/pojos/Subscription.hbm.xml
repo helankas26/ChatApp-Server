@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 30-May-2022 06:35:13 by Hibernate Tools 4.3.1 -->
+<!-- Generated 29-Mar-2023 16:19:54 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.chatapp.pojos.Subscription" table="subscription" catalog="chatapp_rmi" optimistic-lock="version">
         <composite-id name="id" class="com.chatapp.pojos.SubscriptionId">
