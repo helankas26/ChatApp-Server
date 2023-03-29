@@ -5,6 +5,7 @@
  */
 package com.chatapp.service;
 
+import com.chatapp.pojos.Chat;
 import com.chatapp.pojos.User;
 import com.chatapp.rmi.UserRemote;
 import com.chatapp.util.Connection;
@@ -89,15 +90,25 @@ public class UserService extends UnicastRemoteObject implements UserRemote {
     }
     
     @Override
-    public List<User> login(String username, String password) {
+    public User login(String username, String password) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
         
-        List<User> user = s.createQuery("from User where username = '" + username + "' AND password = '" + password + "'").list();
+        User user = (User) s.createQuery("from User where username = '" + username + "' AND password = '" + password + "'");
         
         t.commit();
         s.close();
         
         return user;
+    }
+
+    @Override
+    public List<User> getSubscribedUsers(Chat chat) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public List<User> getToSubscribeUsers(Chat chat) throws RemoteException {
+        return null;
     }
 }

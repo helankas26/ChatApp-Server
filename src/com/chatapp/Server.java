@@ -1,11 +1,15 @@
 package com.chatapp;
 
-import com.chatapp.dao.ChatDAO;
-import com.chatapp.dao.ChatsessionDAO;
-import com.chatapp.dao.MessageDAO;
-import com.chatapp.dao.SubscriptionDAO;
-import com.chatapp.dao.UserDAO;
-import com.chatapp.pojos.Chatsession;
+import com.chatapp.rmi.ChatRemote;
+import com.chatapp.rmi.ChatSessionRemote;
+import com.chatapp.rmi.MessageRemote;
+import com.chatapp.rmi.SubscriptionRemote;
+import com.chatapp.rmi.UserRemote;
+import com.chatapp.service.ChatService;
+import com.chatapp.service.ChatSessionService;
+import com.chatapp.service.MessageService;
+import com.chatapp.service.SubscriptionService;
+import com.chatapp.service.UserService;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -26,11 +30,11 @@ public class Server {
     public static void main(String[] args) throws RemoteException {
         try {
                //Create remote object
-               ChatDAO chatStub = new ChatDAO();
-               ChatsessionDAO chatsessionStub = new ChatsessionDAO();
-               MessageDAO messagechatsessionStub = new MessageDAO();
-               SubscriptionDAO subscriptionStub = new SubscriptionDAO();
-               UserDAO userStub = new UserDAO();
+               ChatRemote chatStub = new ChatService();
+               ChatSessionRemote chatSessionStub = new ChatSessionService();
+               //MessageRemote messageStub = new MessageService();
+               SubscriptionRemote subscriptionStub = new SubscriptionService();
+               UserRemote userStub = new UserService();
 
 
                //Create a remote registry
@@ -38,8 +42,8 @@ public class Server {
 
                //Register the remote objects to the registry and advertise
                reg.rebind("ChatService", (Remote) chatStub);
-               reg.rebind("ChatsessionService", (Remote) chatsessionStub);
-               reg.rebind("MessageService", (Remote) messagechatsessionStub);
+               reg.rebind("ChatsessionService", (Remote) chatSessionStub);
+               //reg.rebind("MessageService", (Remote) messageStub);
                reg.rebind("SubscriptionService", (Remote) subscriptionStub);
                reg.rebind("UserService", (Remote) userStub);
 

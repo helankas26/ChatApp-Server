@@ -29,20 +29,20 @@ public class ChatSessionService extends UnicastRemoteObject implements ChatSessi
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
         
-        List<ChatSession> chatsessions = s.createQuery("from Chatsession").list();
+        List<ChatSession> chatSessions = s.createQuery("from ChatSession").list();
         
         t.commit();
         s.close();
         
-        return chatsessions;
+        return chatSessions;
     }
     
     @Override
-    public boolean createChatsession(ChatSession chatsession) {
+    public boolean startChatsession(ChatSession chatSession) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
         
-        s.save(chatsession);
+        s.save(chatSession);
         t.commit();
         s.close();
         
@@ -50,11 +50,11 @@ public class ChatSessionService extends UnicastRemoteObject implements ChatSessi
     }
     
     @Override
-    public ChatSession getChatsession(ChatSession chatsession) {
+    public ChatSession getChatsession(ChatSession chatSession) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
         
-        ChatSession cs = (ChatSession) s.get(ChatSession.class, chatsession.getSessionId());
+        ChatSession cs = (ChatSession) s.get(ChatSession.class, chatSession.getSessionId());
         
         t.commit();
         s.close();
@@ -63,22 +63,22 @@ public class ChatSessionService extends UnicastRemoteObject implements ChatSessi
     }
     
     @Override
-    public boolean updateChatsession(ChatSession chatsession) {
+    public boolean endChatsession(ChatSession chatSession) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
         
-        s.update(chatsession);
+        s.update(chatSession);
         t.commit();
         s.close();
         
         return true;
     }
     @Override
-    public boolean deleteChatsession(ChatSession chatsession) {
+    public boolean deleteChatsession(ChatSession chatSession) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
 
-        ChatSession cs = (ChatSession) s.get(ChatSession.class, chatsession.getSessionId());
+        ChatSession cs = (ChatSession) s.get(ChatSession.class, chatSession.getSessionId());
         s.delete(cs);
         
         t.commit();

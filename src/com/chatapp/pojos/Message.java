@@ -14,22 +14,22 @@ import java.util.Date;
 public class Message {
     
     private User user;
-    private Chatsession chatsession;
+    private ChatSession chatSession;
     private String msgBody;
     private Date sentAt;
 
     public Message() {
     }
 
-    public Message(User user, Chatsession chatsession, String msgBody) {
+    public Message(User user, ChatSession chatSession, String msgBody) {
         this.user = user;
-        this.chatsession = chatsession;
+        this.chatSession = chatSession;
         this.msgBody = msgBody;
     }
 
-    public Message(User user, Chatsession chatsession, String msgBody, Date sentAt) {
+    public Message(User user, ChatSession chatSession, String msgBody, Date sentAt) {
         this.user = user;
-        this.chatsession = chatsession;
+        this.chatSession = chatSession;
         this.msgBody = msgBody;
         this.sentAt = sentAt;
     }
@@ -42,12 +42,12 @@ public class Message {
         this.user = user;
     }
 
-    public Chatsession getChatsession() {
-        return chatsession;
+    public ChatSession getChatsession() {
+        return chatSession;
     }
 
-    public void setChatsession(Chatsession chatsession) {
-        this.chatsession = chatsession;
+    public void setChatsession(ChatSession chatSession) {
+        this.chatSession = chatSession;
     }
 
     public String getMsgBody() {
