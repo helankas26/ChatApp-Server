@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.chatapp.dao;
+package com.chatapp.service;
 
 /**
  *
  * @author Helanka
  */
-public class MessageDAO {
+public class MessageService {
     
 }

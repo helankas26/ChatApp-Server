@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.chatapp.dao;
+package com.chatapp.service;
 
 import com.chatapp.pojos.Subscription;
 import com.chatapp.rmi.SubscriptionRemote;
@@ -18,12 +18,13 @@ import org.hibernate.Transaction;
  *
  * @author Helanka
  */
-public class SubscriptionDAO extends UnicastRemoteObject implements SubscriptionRemote{
+public class SubscriptionService extends UnicastRemoteObject implements SubscriptionRemote{
     
-    public SubscriptionDAO() throws RemoteException{
+    public SubscriptionService() throws RemoteException{
         super();
     }
     
+    @Override
     public List<Subscription> getAllSubscribers() {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
@@ -36,6 +37,7 @@ public class SubscriptionDAO extends UnicastRemoteObject implements Subscription
         return subscriptions;
     }
     
+    @Override
     public boolean subscribe(Subscription subscription) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
@@ -47,6 +49,7 @@ public class SubscriptionDAO extends UnicastRemoteObject implements Subscription
         return true;
     }
     
+    @Override
     public Subscription getSubscriber(Subscription subscription) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
@@ -59,6 +62,7 @@ public class SubscriptionDAO extends UnicastRemoteObject implements Subscription
         return sb;
     }
     
+    @Override
     public boolean updateSubscriber(Subscription subscription) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
@@ -70,6 +74,7 @@ public class SubscriptionDAO extends UnicastRemoteObject implements Subscription
         return true;
     }
     
+    @Override
     public boolean unsubscribe(Subscription subscription) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();

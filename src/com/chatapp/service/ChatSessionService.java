@@ -5,69 +5,44 @@
  */
 package com.chatapp.service;
 
-import com.chatapp.pojos.User;
-import com.chatapp.rmi.UserRemote;
+import com.chatapp.pojos.ChatSession;
 import com.chatapp.util.Connection;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import com.chatapp.rmi.ChatSessionRemote;
 
 /**
  *
  * @author Helanka
  */
-public class UserService extends UnicastRemoteObject implements UserRemote {
+public class ChatSessionService extends UnicastRemoteObject implements ChatSessionRemote{
     
-    public UserService() throws RemoteException{
+    public ChatSessionService() throws RemoteException{
         super();
     }
     
     @Override
-    public List<User> getAllUser() {
+    public List<ChatSession> getAllChatsession() {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
         
-        List<User> users = s.createQuery("from User").list();
+        List<ChatSession> chatsessions = s.createQuery("from Chatsession").list();
         
         t.commit();
         s.close();
         
-        return users;
+        return chatsessions;
     }
     
     @Override
-    public boolean registerUser(User user) {
+    public boolean createChatsession(ChatSession chatsession) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
         
-        s.save(user);
-        t.commit();
-        s.close();
-        
-        return true;
-    }
-    
-    @Override
-    public User getUser(User user) {
-        Session s = Connection.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
-        
-        User u = (User) s.get(User.class, user.getUserId());
-        
-        t.commit();
-        s.close();
-        
-        return u;
-    }
-    
-    @Override
-    public boolean updateUser(User user) {
-        Session s = Connection.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
-        
-        s.update(user);
+        s.save(chatsession);
         t.commit();
         s.close();
         
@@ -75,29 +50,40 @@ public class UserService extends UnicastRemoteObject implements UserRemote {
     }
     
     @Override
-    public boolean deleteUser(User user) {
+    public ChatSession getChatsession(ChatSession chatsession) {
+        Session s = Connection.getSessionFactory().openSession();
+        Transaction t = s.beginTransaction();
+        
+        ChatSession cs = (ChatSession) s.get(ChatSession.class, chatsession.getSessionId());
+        
+        t.commit();
+        s.close();
+        
+        return cs;
+    }
+    
+    @Override
+    public boolean updateChatsession(ChatSession chatsession) {
+        Session s = Connection.getSessionFactory().openSession();
+        Transaction t = s.beginTransaction();
+        
+        s.update(chatsession);
+        t.commit();
+        s.close();
+        
+        return true;
+    }
+    @Override
+    public boolean deleteChatsession(ChatSession chatsession) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
 
-        User u = (User) s.get(User.class, user.getUserId());
-        s.delete(u);
+        ChatSession cs = (ChatSession) s.get(ChatSession.class, chatsession.getSessionId());
+        s.delete(cs);
         
         t.commit();
         s.close();
         
         return true;
-    }
-    
-    @Override
-    public List<User> login(String username, String password) {
-        Session s = Connection.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
-        
-        List<User> user = s.createQuery("from User where username = '" + username + "' AND password = '" + password + "'").list();
-        
-        t.commit();
-        s.close();
-        
-        return user;
     }
 }

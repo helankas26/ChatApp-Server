@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.chatapp.dao;
+package com.chatapp.service;
 
 import com.chatapp.pojos.Chat;
 import com.chatapp.rmi.ChatRemote;
@@ -18,12 +18,13 @@ import org.hibernate.Transaction;
  *
  * @author Helanka
  */
-public class ChatDAO extends UnicastRemoteObject implements ChatRemote {
+public class ChatService extends UnicastRemoteObject implements ChatRemote {
 
-    public ChatDAO() throws RemoteException{
+    public ChatService() throws RemoteException{
         super();
     }
     
+    @Override
     public List<Chat> getAllChat() {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
@@ -36,6 +37,7 @@ public class ChatDAO extends UnicastRemoteObject implements ChatRemote {
         return chats;
     }
     
+    @Override
     public boolean createChat(Chat chat) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
@@ -47,6 +49,7 @@ public class ChatDAO extends UnicastRemoteObject implements ChatRemote {
         return true;
     }
     
+    @Override
     public Chat getChat(Chat chat) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
@@ -59,6 +62,7 @@ public class ChatDAO extends UnicastRemoteObject implements ChatRemote {
         return c;
     }
     
+    @Override
     public boolean updateChat(Chat chat) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
@@ -70,6 +74,7 @@ public class ChatDAO extends UnicastRemoteObject implements ChatRemote {
         return true;
     }
     
+    @Override
     public boolean deleteChat(Chat chat) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
@@ -83,6 +88,7 @@ public class ChatDAO extends UnicastRemoteObject implements ChatRemote {
         return true;
     }
     
+    @Override
     public boolean putOnline(Chat chat) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
@@ -97,6 +103,7 @@ public class ChatDAO extends UnicastRemoteObject implements ChatRemote {
         return true;
     }
     
+    @Override
     public boolean putOffline(Chat chat) {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
@@ -111,6 +118,7 @@ public class ChatDAO extends UnicastRemoteObject implements ChatRemote {
         return true;
     }
     
+    @Override
      public boolean isChatOnline() {
         Session s = Connection.getSessionFactory().openSession();
         Transaction t = s.beginTransaction();

@@ -41,8 +41,8 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="chatapp_rmi"/>
-  <table-filter match-name="chatsession"/>
-  <table-filter match-name="chat"/>
-  <table-filter match-name="user"/>
+  <table-filter match-name="chat_session"/>
   <table-filter match-name="subscription"/>
+  <table-filter match-name="user"/>
+  <table-filter match-name="chat"/>
 </hibernate-reverse-engineering>
