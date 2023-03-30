@@ -5,10 +5,12 @@
  */
 package com.chatapp.rmi;
 
+import java.rmi.Remote;
+
 /**
  *
  * @author Helanka
  */
-public interface MessageRemote {
+public interface MessageRemote extends Remote {
     
 }

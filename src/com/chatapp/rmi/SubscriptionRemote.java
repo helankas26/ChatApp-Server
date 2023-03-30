@@ -6,6 +6,7 @@
 package com.chatapp.rmi;
 
 import com.chatapp.pojos.Subscription;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @author Helanka
  */
-public interface SubscriptionRemote {
+public interface SubscriptionRemote extends Remote {
     
     public List<Subscription> getAllSubscribers() throws RemoteException;
     public boolean subscribe(Subscription subscription) throws RemoteException; 

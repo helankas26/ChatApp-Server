@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author Helanka
  */
-public interface ChatRemote extends Remote{
+public interface ChatRemote extends Remote {
     
     public List<Chat> getAllChat() throws RemoteException;
     public boolean createChat(Chat chat) throws RemoteException; 

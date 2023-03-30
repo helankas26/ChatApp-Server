@@ -6,6 +6,7 @@
 package com.chatapp.rmi;
 
 import com.chatapp.pojos.ChatSession;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @author Helanka
  */
-public interface ChatSessionRemote {
+public interface ChatSessionRemote extends Remote {
     
     public List<ChatSession> getAllChatsession() throws RemoteException;
     public boolean startChatsession(ChatSession chatsession) throws RemoteException; 

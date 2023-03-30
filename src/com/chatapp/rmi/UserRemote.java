@@ -7,6 +7,7 @@ package com.chatapp.rmi;
 
 import com.chatapp.pojos.Chat;
 import com.chatapp.pojos.User;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author Helanka
  */
-public interface UserRemote {
+public interface UserRemote extends Remote {
     public List<User> getAllUser() throws RemoteException;
     public boolean registerUser(User user)throws RemoteException; 
     public User getUser(User user)throws RemoteException;
