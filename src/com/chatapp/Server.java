@@ -1,4 +1,4 @@
-package com.chatapp.server;
+package com.chatapp;
 
 import com.chatapp.rmi.ChatRemote;
 import com.chatapp.rmi.ChatSessionRemote;
@@ -27,7 +27,7 @@ import java.rmi.registry.Registry;
  * @author Helanka
  */
 public class Server {
-    public static void main(String[] args) throws RemoteException {
+    public static void main(String[] args) {
         try {
                //Create remote object
                ChatRemote chatStub = new ChatService();
@@ -41,11 +41,11 @@ public class Server {
                Registry reg = LocateRegistry.createRegistry(4000);
 
                //Register the remote objects to the registry and advertise
-               reg.rebind("ChatService", (Remote) chatStub);
-               reg.rebind("ChatSessionService", (Remote) chatSessionStub);
-               //reg.rebind("MessageService", (Remote) messageStub);
-               reg.rebind("SubscriptionService", (Remote) subscriptionStub);
-               reg.rebind("UserService", (Remote) userStub);
+               reg.rebind("ChatService", chatStub);
+               reg.rebind("ChatSessionService", chatSessionStub);
+               //reg.rebind("MessageService", messageStub);
+               reg.rebind("SubscriptionService", subscriptionStub);
+               reg.rebind("UserService", userStub);
 
                System.out.println("Server is connected and running.....");
            } catch (RemoteException ex) {
