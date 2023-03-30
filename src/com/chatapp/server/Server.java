@@ -1,4 +1,4 @@
-package com.chatapp;
+package com.chatapp.server;
 
 import com.chatapp.rmi.ChatRemote;
 import com.chatapp.rmi.ChatSessionRemote;
@@ -42,7 +42,7 @@ public class Server {
 
                //Register the remote objects to the registry and advertise
                reg.rebind("ChatService", (Remote) chatStub);
-               reg.rebind("ChatsessionService", (Remote) chatSessionStub);
+               reg.rebind("ChatSessionService", (Remote) chatSessionStub);
                //reg.rebind("MessageService", (Remote) messageStub);
                reg.rebind("SubscriptionService", (Remote) subscriptionStub);
                reg.rebind("UserService", (Remote) userStub);
