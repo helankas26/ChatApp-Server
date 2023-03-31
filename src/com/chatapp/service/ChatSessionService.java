@@ -9,10 +9,10 @@ import com.chatapp.pojos.ChatSession;
 import com.chatapp.util.Connection;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import com.chatapp.rmi.ChatSessionRemote;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,13 +25,13 @@ public class ChatSessionService extends UnicastRemoteObject implements ChatSessi
     }
     
     @Override
-    public List<ChatSession> getAllChatsession() {
+    public ArrayList<ChatSession> getAllChatsession() {
         Session s = Connection.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
+//        Transaction t = s.beginTransaction();
         
-        List<ChatSession> chatSessions = s.createQuery("from ChatSession").list();
+        ArrayList<ChatSession> chatSessions = (ArrayList<ChatSession>) s.createQuery("from ChatSession").list();
         
-        t.commit();
+//        t.commit();
         s.close();
         
         return chatSessions;
@@ -52,11 +52,11 @@ public class ChatSessionService extends UnicastRemoteObject implements ChatSessi
     @Override
     public ChatSession getChatsession(ChatSession chatSession) {
         Session s = Connection.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
+//        Transaction t = s.beginTransaction();
         
         ChatSession cs = (ChatSession) s.get(ChatSession.class, chatSession.getSessionId());
         
-        t.commit();
+//        t.commit();
         s.close();
         
         return cs;
@@ -73,6 +73,7 @@ public class ChatSessionService extends UnicastRemoteObject implements ChatSessi
         
         return true;
     }
+    
     @Override
     public boolean deleteChatsession(ChatSession chatSession) {
         Session s = Connection.getSessionFactory().openSession();

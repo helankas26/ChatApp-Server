@@ -10,7 +10,7 @@ import com.chatapp.rmi.ChatRemote;
 import com.chatapp.util.Connection;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.List;
+import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -25,13 +25,13 @@ public class ChatService extends UnicastRemoteObject implements ChatRemote {
     }
     
     @Override
-    public List<Chat> getAllChat() {
+    public ArrayList<Chat> getAllChat() {
         Session s = Connection.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
+//        Transaction t = s.beginTransaction();
         
-        List<Chat> chats = s.createQuery("from Chat").list();
+        ArrayList<Chat> chats = (ArrayList<Chat>) s.createQuery("from Chat").list();
         
-        t.commit();
+//        t.commit();
         s.close();
         
         return chats;
@@ -52,11 +52,11 @@ public class ChatService extends UnicastRemoteObject implements ChatRemote {
     @Override
     public Chat getChat(Chat chat) {
         Session s = Connection.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
+//        Transaction t = s.beginTransaction();
         
         Chat c = (Chat) s.get(Chat.class, chat.getChatId());
         
-        t.commit();
+//        t.commit();
         s.close();
         
         return c;
@@ -121,11 +121,11 @@ public class ChatService extends UnicastRemoteObject implements ChatRemote {
     @Override
      public boolean isChatOnline() {
         Session s = Connection.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
+//        Transaction t = s.beginTransaction();
         
         Chat chat = (Chat) s.createQuery("from Chat where status = 1");
         
-        t.commit();
+//        t.commit();
         s.close();
         
         return chat != null;

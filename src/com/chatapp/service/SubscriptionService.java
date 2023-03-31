@@ -10,7 +10,7 @@ import com.chatapp.rmi.SubscriptionRemote;
 import com.chatapp.util.Connection;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.List;
+import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -25,13 +25,13 @@ public class SubscriptionService extends UnicastRemoteObject implements Subscrip
     }
     
     @Override
-    public List<Subscription> getAllSubscribers() {
+    public ArrayList<Subscription> getAllSubscribers() {
         Session s = Connection.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
+//        Transaction t = s.beginTransaction();
         
-        List<Subscription> subscriptions = s.createQuery("from Subscription").list();
+        ArrayList<Subscription> subscriptions = (ArrayList<Subscription>) s.createQuery("from Subscription").list();
         
-        t.commit();
+//        t.commit();
         s.close();
         
         return subscriptions;
@@ -52,11 +52,11 @@ public class SubscriptionService extends UnicastRemoteObject implements Subscrip
     @Override
     public Subscription getSubscriber(Subscription subscription) {
         Session s = Connection.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
+//        Transaction t = s.beginTransaction();
         
         Subscription sb = (Subscription) s.get(Subscription.class, subscription.getId().getUserId());
         
-        t.commit();
+//        t.commit();
         s.close();
         
         return sb;

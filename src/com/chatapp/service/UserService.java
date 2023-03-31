@@ -11,7 +11,7 @@ import com.chatapp.rmi.UserRemote;
 import com.chatapp.util.Connection;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.List;
+import java.util.ArrayList;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -27,11 +27,11 @@ public class UserService extends UnicastRemoteObject implements UserRemote {
     }
     
     @Override
-    public List<User> getAllUser() {
+    public ArrayList<User> getAllUser() {
         Session s = Connection.getSessionFactory().openSession();
 //        Transaction t = s.beginTransaction();
         
-        List<User> users = s.createQuery("from User").list();
+        ArrayList<User> users = (ArrayList<User>) s.createQuery("from User").list();
         
 //        t.commit();
         s.close();
@@ -112,12 +112,14 @@ public class UserService extends UnicastRemoteObject implements UserRemote {
     }
 
     @Override
-    public List<User> getSubscribedUsers(Chat chat) throws RemoteException {
+    public ArrayList<User> getSubscribedUsers(Chat chat) throws RemoteException {
         return null;
     }
 
     @Override
-    public List<User> getToSubscribeUsers(Chat chat) throws RemoteException {
+    public ArrayList<User> getToSubscribeUsers(Chat chat) throws RemoteException {
         return null;
     }
+
+    
 }

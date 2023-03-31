@@ -8,7 +8,7 @@ package com.chatapp.rmi;
 import com.chatapp.pojos.Subscription;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface SubscriptionRemote extends Remote {
     
-    public List<Subscription> getAllSubscribers() throws RemoteException;
+    public ArrayList<Subscription> getAllSubscribers() throws RemoteException;
     public boolean subscribe(Subscription subscription) throws RemoteException; 
     public Subscription getSubscriber(Subscription subscription) throws RemoteException;
     public boolean updateSubscriber(Subscription subscription) throws RemoteException; 
