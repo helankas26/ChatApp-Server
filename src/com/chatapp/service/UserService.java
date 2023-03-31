@@ -12,6 +12,7 @@ import com.chatapp.util.Connection;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -28,11 +29,11 @@ public class UserService extends UnicastRemoteObject implements UserRemote {
     @Override
     public List<User> getAllUser() {
         Session s = Connection.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
+//        Transaction t = s.beginTransaction();
         
         List<User> users = s.createQuery("from User").list();
         
-        t.commit();
+//        t.commit();
         s.close();
         
         return users;
@@ -53,11 +54,11 @@ public class UserService extends UnicastRemoteObject implements UserRemote {
     @Override
     public User getUser(User user) {
         Session s = Connection.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
+//        Transaction t = s.beginTransaction();
         
         User u = (User) s.get(User.class, user.getUserId());
         
-        t.commit();
+//        t.commit();
         s.close();
         
         return u;
@@ -90,13 +91,21 @@ public class UserService extends UnicastRemoteObject implements UserRemote {
     }
     
     @Override
-    public User login(String username, String password) {
+    public User login(User user) {
         Session s = Connection.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
+//        Transaction t = s.beginTransaction();
         
-        User user = (User) s.createQuery("from User where username = '" + username + "' AND password = '" + password + "'");
+        final String password = user.getPassword();
         
-        t.commit();
+        Query query = s.createQuery("from User where username = :username");
+        query.setParameter("username", user.getUsername());
+        user = (User) query.uniqueResult();
+        
+        if (!user.getPassword().equals(password)) {
+            user.setPassword(null);
+        }
+        
+//        t.commit();
         s.close();
         
         return user;

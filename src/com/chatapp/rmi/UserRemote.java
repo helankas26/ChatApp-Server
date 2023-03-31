@@ -21,7 +21,7 @@ public interface UserRemote extends Remote {
     public User getUser(User user)throws RemoteException;
     public boolean updateUser(User user)throws RemoteException; 
     public boolean deleteUser(User user)throws RemoteException;
-    public User login(String username, String password) throws RemoteException;
+    public User login(User user) throws RemoteException;
     
     public List<User> getSubscribedUsers(Chat chat) throws RemoteException;
     public List<User> getToSubscribeUsers(Chat chat) throws RemoteException;
