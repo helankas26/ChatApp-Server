@@ -103,6 +103,11 @@ public class Chat  implements java.io.Serializable {
     public void setChatSessions(Set chatSessions) {
         this.chatSessions = chatSessions;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
 
 

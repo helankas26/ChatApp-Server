@@ -114,6 +114,11 @@ public class User  implements java.io.Serializable {
     public void setSubscriptions(Set subscriptions) {
         this.subscriptions = subscriptions;
     }
+
+    @Override
+    public String toString() {
+        return this.nickname + " {" + this.username + "|" + this.email + "}";
+    }
 }
 
 
