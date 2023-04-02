@@ -101,7 +101,7 @@ public class UserService extends UnicastRemoteObject implements UserRemote {
         query.setParameter("username", user.getUsername());
         user = (User) query.uniqueResult();
         
-        if (!user.getPassword().equals(password)) {
+        if (null != user && !user.getPassword().equals(password)) {
             user.setPassword(null);
         }
         
