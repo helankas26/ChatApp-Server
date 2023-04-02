@@ -22,7 +22,7 @@ public interface ChatRemote extends Remote {
     public boolean updateChat(Chat chat) throws RemoteException; 
     public boolean deleteChat(Chat chat) throws RemoteException; 
     public boolean putOnline(Chat chat) throws RemoteException; 
-    public boolean putOffline(Chat chat) throws RemoteException; 
+    public boolean putOffline(Chat chat) throws RemoteException;
+    public boolean putAllOffline() throws RemoteException; 
     public boolean isChatOnline() throws RemoteException; 
-
 }

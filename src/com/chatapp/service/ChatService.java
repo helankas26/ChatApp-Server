@@ -11,6 +11,7 @@ import com.chatapp.util.Connection;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -119,17 +120,32 @@ public class ChatService extends UnicastRemoteObject implements ChatRemote {
     }
     
     @Override
-     public boolean isChatOnline() {
+    public boolean putAllOffline() throws RemoteException {
+        Session s = Connection.getSessionFactory().openSession();
+        Transaction t = s.beginTransaction();
+        
+        Query query = s.createQuery("update Chat set status = :status");
+        query.setParameter("status", 0);
+        query.executeUpdate();
+                
+        t.commit();
+        s.close();
+        
+        return true;
+    }
+    
+    @Override
+    public boolean isChatOnline() {
         Session s = Connection.getSessionFactory().openSession();
 //        Transaction t = s.beginTransaction();
         
-        Chat chat = (Chat) s.createQuery("from Chat where status = 1");
+        Query query = s.createQuery("from Chat where status = :status");
+        query.setParameter("status", 1);
+        Chat chat = (Chat) query.uniqueResult();
         
 //        t.commit();
         s.close();
         
         return chat != null;
-        
     }
-    
 }
