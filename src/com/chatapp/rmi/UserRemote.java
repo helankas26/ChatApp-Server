@@ -17,10 +17,12 @@ import java.util.ArrayList;
  */
 public interface UserRemote extends Remote {
     public ArrayList<User> getAllUser() throws RemoteException;
-    public boolean registerUser(User user)throws RemoteException; 
-    public User getUser(User user)throws RemoteException;
-    public boolean updateUser(User user)throws RemoteException; 
-    public boolean deleteUser(User user)throws RemoteException;
+    public boolean registerUser(User user) throws RemoteException; 
+    public User getUser(User user) throws RemoteException;
+    public boolean updateUser(User user) throws RemoteException; 
+    public boolean deleteUser(User user) throws RemoteException;
+    public boolean blockUser(User user) throws RemoteException;
+    public boolean unblockUser(User user) throws RemoteException;
     public User login(User user) throws RemoteException;
     
     public ArrayList<User> getSubscribedUsers(Chat chat) throws RemoteException;
