@@ -144,11 +144,41 @@ public class UserService extends UnicastRemoteObject implements UserRemote {
 
     @Override
     public ArrayList<User> getSubscribedUsers(Chat chat) throws RemoteException {
-        return null;
+        Session s = Connection.getSessionFactory().openSession();
+//        Transaction t = s.beginTransaction();
+        
+        Query query = s.createQuery("from User where userId in ("
+                + "select u.userId "
+                + "from User u "
+                + "left join u.subscriptions s "
+                + "where s.id.chatId = :chatId)"
+        );
+        query.setParameter("chatId", chat.getChatId());
+        ArrayList<User> users = (ArrayList<User>) query.list();
+    
+//        t.commit();
+        s.close();
+        
+        return users;
     }
 
     @Override
     public ArrayList<User> getToSubscribeUsers(Chat chat) throws RemoteException {
-        return null;
+        Session s = Connection.getSessionFactory().openSession();
+//        Transaction t = s.beginTransaction();
+        
+        Query query = s.createQuery("from User where userId not in ("
+                + "select u.userId "
+                + "from User u "
+                + "left join u.subscriptions s "
+                + "where s.id.chatId = :chatId)"
+        );
+        query.setParameter("chatId", chat.getChatId());
+        ArrayList<User> users = (ArrayList<User>) query.list();        
+    
+//        t.commit();
+        s.close();
+        
+        return users;
     }
 }
