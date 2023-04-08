@@ -6,6 +6,7 @@
 package com.chatapp.rmi;
 
 import com.chatapp.pojos.Chat;
+import com.chatapp.pojos.User;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -24,5 +25,8 @@ public interface ChatRemote extends Remote {
     public boolean putOnline(Chat chat) throws RemoteException; 
     public boolean putOffline(Chat chat) throws RemoteException;
     public boolean putAllOffline() throws RemoteException; 
-    public boolean isChatOnline() throws RemoteException; 
+    public boolean isChatOnline() throws RemoteException;
+    
+    public ArrayList<Chat> getSubscribedChats(User user) throws RemoteException;
+    public ArrayList<Chat> getToSubscribeChats(User user) throws RemoteException;
 }
