@@ -155,11 +155,11 @@ public class ChatService extends UnicastRemoteObject implements ChatRemote {
         Session s = Connection.getSessionFactory().openSession();
 //        Transaction t = s.beginTransaction();
         
-        Query query = s.createQuery("from Chat where chatId in ("
+        Query query = s.createQuery("from Chat c where chatId in ("
                 + "select c.chatId "
                 + "from Chat c "
                 + "left join c.subscriptions s "
-                + "where s.id.userId = :userId)"
+                + "where s.id.userId = :userId) order by c.status desc"
         );
         query.setParameter("userId", user.getUserId());
         ArrayList<Chat> users = (ArrayList<Chat>) query.list();
@@ -175,11 +175,11 @@ public class ChatService extends UnicastRemoteObject implements ChatRemote {
         Session s = Connection.getSessionFactory().openSession();
 //        Transaction t = s.beginTransaction();
         
-        Query query = s.createQuery("from Chat where chatId not in ("
+        Query query = s.createQuery("from Chat c where chatId not in ("
                 + "select c.chatId "
                 + "from Chat c "
                 + "left join c.subscriptions s "
-                + "where s.id.userId = :userId)"
+                + "where s.id.userId = :userId) order by c.status desc"
         );
         query.setParameter("userId", user.getUserId());
         ArrayList<Chat> users = (ArrayList<Chat>) query.list();        
